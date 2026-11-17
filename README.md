@@ -46,5 +46,5 @@ Copy this folder, rename it in `project.godot`, set `Game.first_level`, and dele
 
 ## Licences
 
-Kit code is MIT licensed (see `LICENSE`). Addons keep their own MIT licences in
+Kit code is MIT licensed (see `LICENSE`; third-party details in `THIRD_PARTY_NOTICES.md`). Addons keep their own MIT licences in
 `addons/*/`, and the vendored skills in `.agents/skills/` are Apache-2.0.
