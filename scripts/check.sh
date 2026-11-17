@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
-# One command for agents and CI: import, smoke-run every level, run all tests.
+# One command for agents and CI: import, path/uid and compile checks, smoke-run every
+# level, run all tests.
 # Exit code is non-zero on any script error or failing test.
 set -uo pipefail
 cd "$(dirname "$0")/.."
@@ -12,6 +13,26 @@ fail=0
 echo "== import"
 out=$("$GODOT" --headless --path . --import 2>&1)
 if echo "$out" | grep -E "SCRIPT ERROR|Parse Error|ERROR: Failed" | grep -Ev "$NOISE"; then fail=1; fi
+
+SKILLS=.agents/skills
+if [ -f "$SKILLS/godot-nodes-scenes/scripts/check_godot_project.py" ]; then
+	echo "== res:// paths, uids and scene structure (godot-nodes-scenes skill)"
+	# Errors anywhere fail the check. Warnings are shown only outside addons/, which
+	# carry a few harmless upstream ones (stale uids in addon example scenes).
+	out=$(python3 -I "$SKILLS/godot-nodes-scenes/scripts/check_godot_project.py" . 2>&1)
+	status=$?
+	echo "$out" | grep -E "^(ERROR|WARNING) " | grep -Ev "^WARNING addons/" -A1
+	echo "$out" | grep -E "^Summary:"
+	[ $status -eq 0 ] || fail=1
+fi
+
+if [ -f "$SKILLS/godot-gdscript/assets/check_scripts_compile.gd" ]; then
+	echo "== every GDScript file compiles (godot-gdscript skill)"
+	out=$("$GODOT" --headless --path . --script "$PWD/$SKILLS/godot-gdscript/assets/check_scripts_compile.gd" 2>&1)
+	status=$?
+	echo "$out" | grep -E "^BROKEN|Parse Error|SCRIPT ERROR|scripts checked" | grep -Ev "$NOISE"
+	[ $status -eq 0 ] || fail=1
+fi
 
 echo "== smoke run scenes (3 s each)"
 for scene in kit/ui/main_menu.tscn $(ls example/*.tscn levels/*.tscn 2>/dev/null | grep -i level); do
