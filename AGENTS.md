@@ -25,6 +25,9 @@ existing piece; do not write a parallel version.
 | Save / load | `SaveSystem` + `persist` group with `save_state()` / `load_state()` | direct `FileAccess` save code |
 | Story flags | `Game.flags` (also readable from dialogue) | new global singletons |
 | Input bindings | `KitInput.DEFAULT_ACTIONS` | `Input.is_key_pressed(KEY_...)` |
+| Level layout | `AsciiTileMapLayer` + a `.txt` layout (see `example/level_01.txt`) | levels built in code, hand-placed platforms |
+| Sound effects, music | `Audio.play(stream)`, `Audio.play_music(stream)`; `sound` exports on `Pickup`/`Checkpoint` | `AudioStreamPlayer` nodes per sound |
+| Art, models, sounds | existing packs first, see section 4b and `assets/README.md` | new assets when a pack already has one |
 | Tests | gdUnit4 in `tests/` | ad-hoc print debugging as proof |
 
 Game-specific code goes in your game's folders (`example/` shows the pattern:
@@ -59,7 +62,10 @@ Prefer data the human can read and edit over code:
 - Movement feel → `PlatformerProfile` `.tres` resources (heights in px, times in s).
 - Items → protoset JSON (`example/items.json`): `{ "id": { "name": ..., "max_stack_size": ... } }`.
 - Dialogue → `.dialogue` files (`~ cue`, `Name: line`, `- choice`, `do Game.flags["x"] = true`, `=> END`).
-- Levels → `.tscn` scenes composed from kit scenes; avoid building levels in code.
+- Levels → a text layout read by `AsciiTileMapLayer` (one char per tile; legend on the
+  `Tiles` node: `solids`, `rows`, `tiles`, `entities`, `markers`) inside a `.tscn` that holds
+  the camera, HUD and unique actors. Entity and marker scenes have their origin at their
+  feet so they stand on the tile below. Avoid building levels in code.
 
 ## 3b. Editing project settings while the editor is open
 
@@ -82,6 +88,24 @@ check `git diff project.godot` to confirm the change survived. Headless runs
 
 Player body mask 1. Player `Hurtbox` mask 8. Pickups / interactables / checkpoints mask 2.
 `KillZone` mask 6. Enemy `Hitbox` layer 8, mask 0.
+
+## 4b. Assets
+
+Follow `assets/README.md`. In short:
+- Use what exists: `assets/kenney/` (CC0, in git), more packs via
+  `scripts/assets/kenney.py` (catalog in `assets/kenney/CATALOG.md`), Synty packs via
+  `scripts/assets/synty.py` into `assets/local/synty/`.
+- **Synty files are licensed for use, not redistribution: they live only in the
+  git-ignored `assets/local/`. Never copy them elsewhere, commit, upload or attach them.**
+- Look before using: `scripts/assets/preview.sh res://<folder>` for 3D (one PNG per page of
+  models), the `create-game-assets` skill's preview/report scripts for 2D.
+- New 3D models: build them in Blender through the Blender MCP server (project
+  `.mcp.json`; Blender must be open with the "MCP for Blender" add-on, which starts its
+  server automatically). Save the `.blend` before running code in Blender, and export
+  `.glb` to `assets/models/`. Never call its `set_telemetry_consent` tool. Poly Haven
+  downloads are off unless the human asks.
+- New 2D art or sound: follow the `create-game-assets` skill and record the source in
+  the provenance table in `assets/README.md`. Ask before using any paid service.
 
 ## 5. Definition of done
 
@@ -116,19 +140,24 @@ Never claim something works because the code "looks right".
 ## 6. Skills
 
 Installed in `.agents/skills/` (Codex) and linked as `.claude/skills/` (Claude Code),
-pinned per `.agents/skills/SOURCE.md`:
+pinned per `.agents/skills/SOURCE.md`. Each loads only when a task needs it:
 
 - `godot-gdscript`: typed GDScript 2.0, `await`, porting Godot 3 code.
 - `godot-nodes-scenes`: scene structure, instancing, autoloads, broken `res://`/uid checker.
 - `godot-tilemap`: `TileMapLayer`/`TileSet` (the `TileMap` node is deprecated).
+- `godot-animation`: `AnimatedSprite2D`, `AnimationPlayer`/`AnimationTree`, tweens.
+- `godot-audio`: audio players and buses (the kit's `Audio` autoload sits on top).
+- `godot-3d-essentials`: 3D scenes, lights, environment, materials (for Kenney/Synty 3D).
+- `create-game-assets`: art direction, consistent asset families, QA and provenance.
+- `game-feel`: screen shake, hit-stop, squash and stretch on top of working mechanics.
+- `level-design`: layouts measured against the real controller, gating, pacing.
 
 When a skill's advice conflicts with this file (for example writing your own
-movement or test runner), this file wins: the kit's components and gdUnit4 tests stay.
+movement, camera or test runner), this file wins: the kit's components stay.
 
-Keep at most 2–3 focused skills loaded on top of this file. Large or many skill
-bundles help less (SkillsBench), and skills an agent writes for itself made results
-worse than none. Do not generate new skills from your own notes unless the human
-asks and reviews them.
+Load at most 2–3 skills for any one task. Large or many simultaneous skills help less
+(SkillsBench), and skills an agent writes for itself made results worse than none. Do
+not generate new skills from your own notes unless the human asks and reviews them.
 
 ## 7. Ask the human about
 

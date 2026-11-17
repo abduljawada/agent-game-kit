@@ -1,0 +1,274 @@
+# Kenney catalog
+
+Every pack in `Kenney Game Assets All-in-1 3.8.0.zip` (CC0). Extract one with
+`scripts/assets/kenney.py add "<Category>/<Pack>"`. Extracted packs are marked ✓.
+
+## 2D assets
+
+- 1-Bit Pack
+- 1-Bit Platformer Pack
+- Abstract Platformer
+- Alien UFO Pack
+- Animal Pack
+- Animal Pack Remastered
+- Axonometric Blocks
+- Background Elements
+- Background Elements Remastered
+- Block Pack
+- Block Pack (Pixel)
+- Boardgame Pack
+- Brick Pack
+- Cartography Pack
+- Character Pack
+- Character Pack Facial Hair
+- Crosshair Pack
+- Desert Shooter Pack
+- Development Essentials
+- Domino Pack
+- Donuts
+- Emote Pack
+- Explosion Pack
+- Fish Pack
+- Flag Pack
+- Foliage Pack
+- Foliage Sprites
+- Generic Items
+- Googly Eyes
+- Hexagon Base Pack
+- Hexagon Buildings Pack
+- Hexagon Pack
+- Holiday Pack 2016
+- Isometric Blocks
+- Isometric Medieval Town
+- Isometric Miniature Bases
+- Isometric Miniature Dungeon
+- Isometric Miniature Farm
+- Isometric Miniature Library
+- Isometric Miniature Overworld
+- Isometric Miniature Prototype
+- Isometric Minigolf
+- Isometric Modular Buildings
+- Isometric Modular Roads
+- Isometric Nature
+- Isometric Space Interior
+- Isometric Tiles Base
+- Isometric Tiles Buildings
+- Isometric Tiles City
+- Isometric Tiles Vehicles
+- Isometric Tower Defense
+- Isometric Vector Buildings
+- Isometric Vector Roads Base
+- Isometric Vector Roads Water
+- Isometric Watercraft
+- Jumper Pack
+- Letter Tiles
+- Letter Tiles Redux
+- Light Masks
+- Map Pack
+- Medals
+- Micro Roguelike
+- Minimap Pack
+- Monochrome Pirates
+- Monochrome RPG Tileset
+- Monster Builder Pack
+- New Platformer Pack
+- Particle Pack
+- Pattern Pack
+- Pattern Pack Extra
+- Pattern Pack Lines
+- Pattern Pack Pixel
+- Physics Assets
+- Pico-8 City
+- Pico-8 Platformer
+- Pirate Pack
+- Pixel Line Platformer
+- Pixel Platformer ✓
+- Pixel Platformer Blocks
+- Pixel Platformer Farm Expansion
+- Pixel Platformer Food Expansion
+- Pixel Platformer Industrial Expansion
+- Pixel Shmup
+- Pixel Vehicle Pack
+- Planets
+- Platformer Assets Base
+- Platformer Assets Buildings
+- Platformer Assets Candy
+- Platformer Assets Extra Animations & Enemies
+- Platformer Assets Holiday
+- Platformer Assets Ice
+- Platformer Assets Mushroom
+- Platformer Assets Pixel
+- Platformer Assets Requests
+- Platformer Assets Tile Extensions
+- Platformer Bricks
+- Platformer Characters 1
+- Platformer Pack Industrial
+- Platformer Pack Medieval
+- Platformer Pack Nautical
+- Platformer Pack Remastered
+- Playing Cards Pack
+- Prototype Textures
+- Puzzle Pack 1
+- Puzzle Pack 2
+- RPG Tiles Vector
+- RPG Urban Pack
+- RTS Medieval
+- RTS Medieval (Pixel)
+- RTS Sci-fi
+- Racing Pack
+- Ranks Pack
+- Retro Textures Fantasy
+- Road Textures
+- Road Textures (Classic)
+- Robot Pack
+- Roguelike Base Pack
+- Roguelike Characters Pack
+- Roguelike City Pack
+- Roguelike Dungeon Pack
+- Roguelike Interior Pack
+- Rolling Ball Assets
+- Rune Pack
+- Scribble Dungeons
+- Scribble Platformer
+- Scribble Platformer Expansion
+- Shape Characters
+- Shooting Gallery
+- Simple Space
+- Simplified Platformer Pack
+- Sketch Desert
+- Sketch Town
+- Sketch Town Expansion
+- Skyboxes
+- Skyboxes Space
+- Smilies
+- Smoke Particles
+- Sokoban Pack
+- Space Shooter Extension
+- Space Shooter Remastered
+- Splat Pack
+- Sports Pack
+- Tank Pack
+- Tappy Plane
+- Tiny Battle
+- Tiny City
+- Tiny Dungeon
+- Tiny Factory
+- Tiny Farm
+- Tiny Ski
+- Tiny Town
+- Toon Characters
+- Topdown Shooter
+- Topdown Shooter (Pixel)
+- Topdown Tanks
+- Topdown Tanks Remastered
+- Tower Defense
+- Voxel Expansion Pack
+- Voxel Pack
+- Yellow Paint Pack
+
+## 3D assets
+
+- Animated Characters Bundle
+- Animated Characters Protagonists
+- Animated Characters Retro
+- Animated Characters Survivors
+- Blaster Kit
+- Blocky Characters
+- Brick Kit
+- Building Kit
+- Car Kit
+- Castle Kit
+- City Kit - Commercial
+- City Kit - Industrial
+- City Kit - Roads
+- City Kit - Suburban
+- Coaster Kit
+- Cube Pets
+- Factory Kit
+- Fantasy Town Kit
+- Food Kit
+- Furniture Kit
+- Graveyard Kit
+- Hexagon Kit
+- Holiday Kit
+- Marble Kit
+- Mini Arcade
+- Mini Arena
+- Mini Characters
+- Mini Dungeon
+- Mini Forest
+- Mini Shop
+- Mini Skate
+- Minigolf Kit
+- Modular Buildings
+- Modular Cave Kit
+- Modular Dungeon Kit
+- Modular Space Kit
+- Nature Kit
+- Nature Kit (Classic)
+- Pirate Kit
+- Platformer Kit ✓
+- Prototype Kit
+- Racing Kit
+- Retro Fantasy Kit
+- Retro Urban Kit
+- Road Pack
+- Space Kit
+- Space Station Kit
+- Survival Kit
+- Tower Defense (Classic)
+- Tower Defense Kit
+- Toy Car Kit
+- Train Kit
+- Watercraft Pack
+- Weapon Pack
+
+## Audio
+
+- Casino Audio
+- Digital Audio
+- Foley Sounds
+- Impact Sounds ✓
+- Interface Sounds ✓
+- Music Jingles ✓
+- Music Loops
+- RPG Audio
+- Retro Sounds 1 ✓
+- Retro Sounds 2 ✓
+- Sci-Fi Sounds
+- Synth Voice 1
+- Synth Voice 2
+- UI Audio
+- Voiceover Pack
+- Voiceover Pack Fighter
+
+## UI assets
+
+- Cursor Pack
+- Cursor Pixel Pack
+- Fantasy UI Borders
+- Mobile Controls
+- UI Adventure Pack
+- UI Pack
+- UI Pack - Adventure
+- UI Pack - Pixel Adventure ✓
+- UI Pack - Sci-fi
+- UI Pixel Pack
+
+## Icons
+
+- Board Game Icons
+- Board Game Info
+- Game Icons
+- Game Icons Expansion
+- Game Icons Fighter Expansion
+- Input Prompts
+- Input Prompts Pixel
+- Input Prompts Pixel 1-Bit
+
+## Other
+
+- Construct samples 1
+- Construct samples 2
+- Fonts ✓
+- Miniguides

@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3]
+[gd_scene load_steps=10 format=3]
 
 [ext_resource type="Script" path="res://kit/ai/patrol_chase_enemy_2d.gd" id="1"]
 [ext_resource type="Script" path="res://kit/mechanics/hitbox.gd" id="2"]
 [ext_resource type="Script" path="res://kit/mechanics/health.gd" id="3"]
+[ext_resource type="Texture2D" path="res://assets/kenney/2d-pixel-platformer/Tilemap/tilemap-characters_packed.png" id="4"]
 
 [sub_resource type="RectangleShape2D" id="body"]
 size = Vector2(14, 12)
@@ -10,20 +11,42 @@ size = Vector2(14, 12)
 [sub_resource type="RectangleShape2D" id="hit"]
 size = Vector2(12, 10)
 
-[node name="Enemy" type="CharacterBody2D"]
+[sub_resource type="AtlasTexture" id="walk1"]
+atlas = ExtResource("4")
+region = Rect2(0, 48, 24, 24)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="walk2"]
+atlas = ExtResource("4")
+region = Rect2(24, 48, 24, 24)
+filter_clip = true
+
+[sub_resource type="SpriteFrames" id="frames"]
+animations = [{
+"frames": [{"duration": 1.0, "texture": SubResource("walk1")}, {"duration": 1.0, "texture": SubResource("walk2")}],
+"loop": true,
+"name": &"walk",
+"speed": 6.0
+}]
+
+[node name="Enemy" type="CharacterBody2D" node_paths=PackedStringArray("visual")]
 collision_layer = 4
 collision_mask = 1
 script = ExtResource("1")
+visual = NodePath("Visual")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -6)
 shape = SubResource("body")
 
-[node name="Visual" type="Polygon2D" parent="."]
-color = Color(0.94, 0.3, 0.32, 1)
-polygon = PackedVector2Array(-7, -6, 7, -6, 7, 6, -7, 6)
+[node name="Visual" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -12)
+sprite_frames = SubResource("frames")
+animation = &"walk"
+autoplay = "walk"
 
 [node name="FloorProbe" type="RayCast2D" parent="."]
-position = Vector2(8, 0)
+position = Vector2(8, -6)
 target_position = Vector2(0, 12)
 
 [node name="Hitbox" type="Area2D" parent="."]
@@ -32,6 +55,7 @@ collision_mask = 0
 script = ExtResource("2")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(0, -6)
 shape = SubResource("hit")
 
 [node name="Health" type="Node" parent="."]

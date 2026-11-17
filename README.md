@@ -10,8 +10,11 @@ it from rewriting them, and a way to check its own work.
   interactables, dialogue triggers, checkpoints, kill zones, a patrol/chase enemy,
   menus, pause, options, HUD, save slots. See `docs/KIT.md`.
 - `addons/`: Phantom Camera, Dialogue Manager, GLoot, LimboAI, gdUnit4, Godot AI (MCP).
-- `example/`: a small level that uses all of the above.
-- `tests/`: 25 gdUnit4 tests, including play tests of the example level with simulated input.
+- `assets/`: Kenney CC0 starter packs (pixel platformer tiles and characters, UI, fonts,
+  sound effects, jingles, a 3D platformer kit), a catalog of ~250 more, and import scripts
+  for Kenney and Synty packs. See `assets/README.md`.
+- `example/`: a small level built from a text layout with Kenney art and sound.
+- `tests/`: 26 gdUnit4 tests, including play tests of the example level with simulated input.
 - `AGENTS.md` / `CLAUDE.md`: the rules the agent follows.
 - `scripts/check.sh`: the single "is it done?" command.
 - `scripts/record.sh`: records a scene, optionally driven by a scripted input timeline (`--inputs`), to frames + a contact sheet so the agent can watch real play.
@@ -27,7 +30,15 @@ it from rewriting them, and a way to check its own work.
      This writes `.mcp.json` in the project. Then run `claude` in this folder once and approve the server.
    - Telemetry: Godot AI sends anonymous usage events by default. Turn it off in the dock,
      or launch Godot with `GODOT_AI_DISABLE_TELEMETRY=true`, then press **Configure** again.
-3. Run `scripts/check.sh`. It should end with `ALL CHECKS PASSED`.
+3. Blender MCP (for agent-made 3D models): Blender plus the "MCP for Blender" add-on, with
+   the server declared in `.mcp.json` (pinned version, telemetry off, safe mode on). Open
+   Blender before asking the agent to model something. For Codex, run
+   `codex mcp add blender --env DISABLE_TELEMETRY=true -- uvx mcp-for-blender==2.3.0`.
+4. Local asset sources: create `assets/local/sources.cfg` with
+   `[sources]` `kenney_zip = <path to the Kenney All-in-1 zip>` and
+   `synty_dir = <folder with your Synty packs>`, then use `scripts/assets/kenney.py` and
+   `scripts/assets/synty.py`. Synty files stay in the git-ignored `assets/local/`.
+5. Run `scripts/check.sh`. It should end with `ALL CHECKS PASSED`.
 
 ## Working with an agent
 

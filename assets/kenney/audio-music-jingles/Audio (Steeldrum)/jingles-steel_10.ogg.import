@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://r2eyovap3eur"
+path="res://.godot/imported/jingles-steel_10.ogg-f21008105f16f51e58fa4094879fbee5.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/kenney/audio-music-jingles/Audio (Steeldrum)/jingles-steel_10.ogg"
+dest_files=["res://.godot/imported/jingles-steel_10.ogg-f21008105f16f51e58fa4094879fbee5.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

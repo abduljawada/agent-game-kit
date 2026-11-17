@@ -1,0 +1,38 @@
+[gd_scene load_steps=7 format=3]
+
+[ext_resource type="Script" path="res://kit/mechanics/checkpoint.gd" id="1"]
+[ext_resource type="Texture2D" path="res://assets/kenney/2d-pixel-platformer/Tilemap/tilemap_packed.png" id="2"]
+[ext_resource type="AudioStream" path="res://assets/kenney/audio-retro-sounds-1/Audio/pickup3.ogg" id="3"]
+
+[sub_resource type="RectangleShape2D" id="shape"]
+size = Vector2(12, 36)
+
+[sub_resource type="AtlasTexture" id="pole"]
+atlas = ExtResource("2")
+region = Rect2(198, 108, 18, 18)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="flag"]
+atlas = ExtResource("2")
+region = Rect2(198, 90, 18, 18)
+filter_clip = true
+
+[node name="Checkpoint" type="Area2D"]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1")
+sound = ExtResource("3")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -18)
+shape = SubResource("shape")
+
+[node name="Visual" type="Node2D" parent="."]
+
+[node name="Pole" type="Sprite2D" parent="Visual"]
+position = Vector2(0, -9)
+texture = SubResource("pole")
+
+[node name="Flag" type="Sprite2D" parent="Visual"]
+position = Vector2(0, -27)
+texture = SubResource("flag")

@@ -1,25 +1,35 @@
 extends PlatformerController2D
-## Example player: kit controller + death handling. Game-specific player logic goes here,
-## not in kit/player/platformer_controller_2d.gd.
+## Example player: kit controller + animation, sounds and death handling. Game-specific
+## player logic goes here, not in kit/player/platformer_controller_2d.gd.
+
+const JUMP_SOUND := preload("res://assets/kenney/audio-retro-sounds-1/Audio/jump1.ogg")
+const HURT_SOUND := preload("res://assets/kenney/audio-impact-sounds/Audio/impactPunch_heavy_000.ogg")
 
 @onready var health: Health = $Health
-@onready var visual: CanvasItem = $Visual
-
-var spawn_point: Vector2
+@onready var visual: AnimatedSprite2D = $Visual
 
 
 func _ready() -> void:
 	super()
 	add_to_group(&"persist")
 	set_meta(&"persist_id", "player")
-	spawn_point = global_position
 	health.died.connect(_on_died)
-	health.damaged.connect(func(_a: int, _s: Node) -> void: _flash())
+	health.damaged.connect(func(_a: int, _s: Node) -> void:
+		Audio.play(HURT_SOUND)
+		_flash())
+	jumped.connect(func() -> void: Audio.play(JUMP_SOUND, -4.0))
+
+
+func _process(_delta: float) -> void:
+	visual.flip_h = facing < 0
+	var anim := &"jump" if not is_on_floor() else (&"walk" if absf(velocity.x) > 10.0 else &"idle")
+	if visual.animation != anim:
+		visual.play(anim)
 
 
 func _on_died() -> void:
 	health.revive()
-	respawn(spawn_point)
+	respawn()
 
 
 func _flash() -> void:

@@ -4,6 +4,8 @@ extends Area2D
 
 signal activated
 
+@export var sound: AudioStream ## played once when first reached
+
 var is_active: bool = false
 
 
@@ -15,4 +17,5 @@ func _on_body_entered(body: Node) -> void:
 	if body.is_in_group(&"player") and not is_active:
 		is_active = true
 		Game.set_respawn_point(global_position)
+		Audio.play(sound, 0.0, 0.0)
 		activated.emit()

@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://dhbgk4j8ad6ha"
+path="res://.godot/imported/jingles-retro_11.ogg-83cf733c729d126c51867b01304d354f.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/kenney/audio-music-jingles/Audio (Retro)/jingles-retro_11.ogg"
+dest_files=["res://.godot/imported/jingles-retro_11.ogg-83cf733c729d126c51867b01304d354f.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

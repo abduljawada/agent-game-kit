@@ -1,20 +1,30 @@
 {
-	"description": "Run right past the guide, hop onto the first ledge, then on to the spikes and jump them.",
+	"description": "Run right, hop onto both plank ledges for three coins, drop down, jump the spikes and the pit, reach the checkpoint.",
 	"events": [
 		{
 			"at": 0.3,
 			"action": "move_right",
-			"hold": 5.5
+			"hold": 5.4
 		},
 		{
-			"at": 2.2,
+			"at": 1.44,
 			"action": "jump",
 			"hold": 0.4
 		},
 		{
-			"at": 4.72,
+			"at": 2.26,
 			"action": "jump",
-			"hold": 0.45
+			"hold": 0.4
+		},
+		{
+			"at": 3.5,
+			"action": "jump",
+			"hold": 0.4
+		},
+		{
+			"at": 4.58,
+			"action": "jump",
+			"hold": 0.4
 		}
 	]
 }

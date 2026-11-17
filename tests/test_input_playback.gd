@@ -29,7 +29,7 @@ func test_timeline_loads_and_uses_known_actions() -> void:
 		assert_bool(InputMap.has_action(e["action"])).is_true()
 
 
-func test_demo_run_clears_ledge_and_spikes() -> void:
+func test_demo_run_reaches_checkpoint_unhurt() -> void:
 	InputPlayback.show_overlay = false
 	InputPlayback.play(InputPlayback.load_timeline(TIMELINE))
 	var health := _player().get_node("Health") as Health
@@ -42,9 +42,9 @@ func test_demo_run_clears_ledge_and_spikes() -> void:
 			log.append("t=%.2f x=%.0f y=%.0f hp=%d" % [InputPlayback.time, _player().global_position.x,
 				_player().global_position.y, health.current])
 	var coins := Pickup.count(Pickup.find_inventory(_player()), "coin")
-	if health.current < health.max_health or coins < 1:
+	if health.current < health.max_health or coins < 4 or not Game.has_respawn_point:
 		print("\n".join(log)) # trajectory, to retime the timeline
-	assert_int(coins).override_failure_message("did not collect the ledge coin").is_greater_equal(1)
 	assert_int(health.current).override_failure_message("got hurt during the run").is_equal(health.max_health)
-	assert_float(_player().global_position.x).is_greater(700.0) # made it past the spikes
+	assert_int(coins).override_failure_message("missed coins (3 on the ledges, 1 after the spikes)").is_greater_equal(4)
+	assert_bool(Game.has_respawn_point).override_failure_message("did not reach the checkpoint").is_true()
 	InputPlayback.show_overlay = true

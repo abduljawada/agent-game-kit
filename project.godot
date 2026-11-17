@@ -24,6 +24,7 @@ Settings="*res://kit/core/settings.gd"
 Game="*res://kit/core/game.gd"
 SaveSystem="*res://kit/core/save_system.gd"
 InputPlayback="*res://kit/core/input_playback.gd"
+Audio="*res://kit/core/audio.gd"
 _mcp_game_helper="*res://addons/godot_ai/runtime/game_helper.gd"
 
 [display]
@@ -37,6 +38,17 @@ window/stretch/mode="canvas_items"
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/dialogue_manager/plugin.cfg", "res://addons/gdUnit4/plugin.cfg", "res://addons/gloot/plugin.cfg", "res://addons/godot_ai/plugin.cfg", "res://addons/phantom_camera/plugin.cfg")
+
+[gui]
+
+theme/custom="res://kit/ui/kit_theme.tres"
+
+[importer_defaults]
+
+scene={
+"fbx/embedded_image_handling": 0,
+"import_script/path": "res://kit/importers/model_post_import.gd"
+}
 
 [internationalization]
 

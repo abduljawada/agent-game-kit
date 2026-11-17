@@ -10,6 +10,8 @@ extends CharacterBody2D
 @export var lose_range: float = 200.0
 @export var gravity: float = 900.0
 @export var target_group: StringName = &"player"
+## Optional sprite to mirror so it faces the walking direction (art should face left).
+@export var visual: Node2D
 
 var direction: int = -1
 var hsm: LimboHSM
@@ -78,6 +80,8 @@ func walk(speed: float, delta: float) -> void:
 		direction = -direction
 	if floor_probe:
 		floor_probe.position.x = absf(floor_probe.position.x) * direction
+	if visual:
+		visual.scale.x = -absf(visual.scale.x) if direction > 0 else absf(visual.scale.x)
 
 
 func _at_ledge() -> bool:

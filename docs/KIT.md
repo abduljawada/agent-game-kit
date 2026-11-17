@@ -12,6 +12,7 @@ uses all of it; copy its patterns, then delete it when your game no longer needs
 | `Game` | `kit/core/game.gd` | `change_scene(path)`, `start_new_game()`, `to_main_menu()`, `set_paused()`, `toggle_pause()`, `flags` dict, `set_respawn_point()`. Set `first_level`. |
 | `SaveSystem` | `kit/core/save_system.gd` | `save_slot(i)`, `load_slot(i)`, `has_slot(i)`, `delete_slot(i)`. Saves `Game.flags` and every node in group `persist` that has `save_state()`/`load_state()`; id = `persist_id` property or meta, else node path. |
 | `InputPlayback` | `kit/core/input_playback.gd` | Replays an input timeline (`play(events)`, `load_timeline(path)`, `stop()`, `playing`, `time`, signal `finished`). Starts itself when launched with `-- --input-timeline=res://x.json` (what `scripts/record.sh --inputs` does). Shows a `t=… actions` overlay while playing. |
+| `Audio` | `kit/core/audio.gd` | `play(stream, volume_db, pitch_jitter)` one-shots on the SFX bus, `play_music(stream, fade)` crossfading loops on the Music bus, `set_bus_volume(bus, linear)`. Creates the buses if missing. |
 | `DialogueManager` | addon | `show_dialogue_balloon(resource, cue)`, signals `dialogue_started/ended`. |
 | `PhantomCameraManager` | addon | Tracks Phantom Cameras. |
 
@@ -40,6 +41,17 @@ uses all of it; copy its patterns, then delete it when your game no longer needs
 | `Checkpoint` | Area2D | Sets `Game` respawn point on touch. |
 | `KillZone` | Area2D | `damage`, `fallback_spawn` (Marker2D). Respawns the player, frees other bodies. |
 
+## Levels (`kit/level/`)
+
+- **`AsciiTileMapLayer`** (`TileMapLayer`): builds tiles and entities from a text layout
+  (`layout_file`, one char per tile, `;` lines are comments). Legend dictionaries:
+  `solids` (char → `top/top_left/top_right/single/fill*/bottom*` atlas coords, picked from
+  neighbours), `rows` (char → `left/middle/right/single`, e.g. planks), `tiles` (char →
+  atlas coords), `entities` (char → PackedScene, spawned as `<Scene><n>` under
+  `entity_parent`), `markers` (char → NodePath of an existing node moved onto the cell).
+  Helpers: `cells_of(char)`, `cell_floor_position(cell)`, signal `built`, and a
+  "Rebuild from layout" button in the inspector. Example: `example/level_01.txt`.
+
 ## AI (`kit/ai/`)
 
 - **`PatrolChaseEnemy2D`** (`CharacterBody2D`): `patrol_speed`, `chase_speed`, `sight_range`,
@@ -48,6 +60,15 @@ uses all of it; copy its patterns, then delete it when your game no longer needs
   `current_state_name()` for tests. New behaviours: add a `LimboState` script and a transition in `_build_hsm()`.
 - For complex AI use LimboAI behaviour trees: a `BTPlayer` node with a `BehaviorTree` resource,
   edited in the LimboAI editor or written as `.tres`.
+
+## Tools and importers
+
+- **`kit/tools/model_gallery.tscn`**: shows every 3D model in a folder as labelled pages;
+  `scripts/assets/preview.sh res://folder` records one PNG per page.
+- **`kit/importers/model_post_import.gd`**: project-wide 3D post-import step
+  (`[importer_defaults]` in `project.godot`). Gives Synty FBX models their texture atlas;
+  other models pass through.
+- **`kit/ui/kit_theme.tres`**: project theme using the Kenney Pixel font.
 
 ## UI (`kit/ui/`)
 

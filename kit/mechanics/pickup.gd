@@ -9,6 +9,7 @@ signal picked_up(by: Node)
 @export var item_id: String = "coin"
 @export var amount: int = 1
 @export var heal_amount: int = 0 ## heals the collector's Health child, if any
+@export var sound: AudioStream ## played through the Audio autoload when collected
 
 
 func _ready() -> void:
@@ -29,6 +30,7 @@ func _on_body_entered(body: Node) -> void:
 		var health := body.get_node_or_null(^"Health") as Health
 		if health:
 			health.heal(heal_amount)
+	Audio.play(sound)
 	picked_up.emit(body)
 	queue_free()
 

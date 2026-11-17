@@ -18,10 +18,13 @@ signal interacted(target: Interactable)
 
 var motor: PlatformerMotor
 var facing: int = 1
+## Where the body was when the level started; respawn() falls back to it.
+var start_position: Vector2
 var _was_on_floor: bool = true
 
 
 func _ready() -> void:
+	start_position = global_position
 	motor = PlatformerMotor.new(profile)
 	motor.jumped.connect(func(_air: bool) -> void: jumped.emit())
 	add_to_group(&"player")
@@ -56,8 +59,11 @@ func _unhandled_input(event: InputEvent) -> void:
 			interacted.emit(target)
 
 
-## Moves the player to the last checkpoint (or `fallback`) and stops it.
-func respawn(fallback: Vector2) -> void:
-	global_position = Game.respawn_point if Game.has_respawn_point else fallback
+## Moves the player to the last checkpoint (else `fallback`, else its start) and stops it.
+func respawn(fallback: Variant = null) -> void:
+	if Game.has_respawn_point:
+		global_position = Game.respawn_point
+	else:
+		global_position = fallback if fallback is Vector2 else start_position
 	velocity = Vector2.ZERO
 	reset_physics_interpolation()
