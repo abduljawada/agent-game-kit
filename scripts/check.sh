@@ -11,6 +11,9 @@ NOISE='_try_connect|Remote Debugger|remote port|Capture not registered|leaked at
 fail=0
 
 echo "== import"
+# A fresh clone's first import can log load-order errors (e.g. the theme font before it
+# is imported), so import once to build the cache, then check a second, clean import.
+[ -d .godot/imported ] || "$GODOT" --headless --path . --import >/dev/null 2>&1
 out=$("$GODOT" --headless --path . --import 2>&1)
 if echo "$out" | grep -E "SCRIPT ERROR|Parse Error|ERROR: Failed" | grep -Ev "$NOISE"; then fail=1; fi
 

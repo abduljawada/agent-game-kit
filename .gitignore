@@ -1,6 +1,6 @@
 .godot/
 /android/
-reports/
+/reports/
 *.tmp
-export/
+/export/
 assets/local/
