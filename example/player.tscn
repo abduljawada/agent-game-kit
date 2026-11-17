@@ -1,0 +1,48 @@
+[gd_scene load_steps=8 format=3]
+
+[ext_resource type="Script" path="res://example/player.gd" id="1"]
+[ext_resource type="Script" path="res://kit/mechanics/health.gd" id="2"]
+[ext_resource type="Script" path="res://kit/mechanics/hurtbox.gd" id="3"]
+[ext_resource type="Script" path="res://addons/gloot/core/inventory.gd" id="4"]
+[ext_resource type="JSON" path="res://example/items.json" id="5"]
+
+[sub_resource type="CapsuleShape2D" id="body"]
+radius = 6.0
+height = 20.0
+
+[sub_resource type="RectangleShape2D" id="hurt"]
+size = Vector2(10, 18)
+
+[node name="Player" type="CharacterBody2D"]
+collision_layer = 2
+collision_mask = 1
+floor_snap_length = 4.0
+script = ExtResource("1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("body")
+
+[node name="Visual" type="Polygon2D" parent="."]
+color = Color(0.36, 0.78, 1, 1)
+polygon = PackedVector2Array(-6, -10, 6, -10, 6, 10, -6, 10)
+
+[node name="Eye" type="Polygon2D" parent="Visual"]
+color = Color(0.05, 0.08, 0.15, 1)
+polygon = PackedVector2Array(1, -6, 4, -6, 4, -3, 1, -3)
+
+[node name="Health" type="Node" parent="."]
+script = ExtResource("2")
+max_health = 3
+
+[node name="Hurtbox" type="Area2D" parent="." node_paths=PackedStringArray("health")]
+collision_layer = 0
+collision_mask = 8
+script = ExtResource("3")
+health = NodePath("../Health")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+shape = SubResource("hurt")
+
+[node name="Inventory" type="Node" parent="."]
+script = ExtResource("4")
+protoset = ExtResource("5")

@@ -1,0 +1,16 @@
+{
+	"coin": {
+		"name": "Coin",
+		"max_stack_size": 999,
+		"value": 1
+	},
+	"key": {
+		"name": "Old Key",
+		"max_stack_size": 1
+	},
+	"potion": {
+		"name": "Potion",
+		"max_stack_size": 9,
+		"heal": 1
+	}
+}

@@ -1,0 +1,15 @@
+~ start
+if Game.flags.get("met_guide", false)
+	Guide: Back again? The coins won't collect themselves.
+	=> END
+Guide: Oh! A visitor. Welcome to the test level.
+do Game.flags["met_guide"] = true
+Guide: Everything here is built from kit parts. What do you want to know?
+- How do I move?
+	Guide: Arrows or A/D to run, Space to jump. Hold it to jump higher.
+- What is that red thing?
+	Guide: A patrolling enemy. It chases you if you get close. Spikes hurt too.
+- Nothing, thanks.
+	Guide: Suit yourself.
+Guide: Press Escape any time to pause or save.
+=> END
