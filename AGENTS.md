@@ -61,6 +61,16 @@ Prefer data the human can read and edit over code:
 - Dialogue → `.dialogue` files (`~ cue`, `Name: line`, `- choice`, `do Game.flags["x"] = true`, `=> END`).
 - Levels → `.tscn` scenes composed from kit scenes; avoid building levels in code.
 
+## 3b. Editing project settings while the editor is open
+
+The Godot editor reads `project.godot` once at startup. If you add an autoload, input
+action or other project setting by editing the file while the editor is open, the editor
+won't see it: it shows false "Identifier ... not declared" parse errors, and if it saves
+project settings later it can overwrite your change. After such an edit, ask the human to
+use **Project → Reload Current Project** (don't change settings in the editor first), then
+check `git diff project.godot` to confirm the change survived. Headless runs
+(`scripts/check.sh`) always read the file fresh, so they are the source of truth.
+
 ## 4. Physics layers
 
 | Layer | Bit value | Who is on it |
