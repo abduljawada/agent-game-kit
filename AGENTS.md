@@ -3,6 +3,9 @@
 This is a game built on the Agent Game Kit (Godot 4.7, GDScript, 2D).
 You (the coding agent) write the game; the human directs design and judges feel.
 Read this file fully before changing anything. Component reference: `docs/KIT.md`.
+If `GAME.md` exists, read it next: it holds this game's design and game-specific rules.
+For design questions `GAME.md` wins; for how to use the kit, this file wins. Put
+game-specific rules in `GAME.md`, not here, so kit updates merge cleanly.
 
 ## 1. Reuse before you write
 

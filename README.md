@@ -52,8 +52,22 @@ Without the MCP server the agent can still build and test headless; it just can'
 
 ## Starting a new game
 
-Copy this folder, rename it in `project.godot`, set `Game.first_level`, and delete
-`example/` once you have your own player and level.
+```bash
+scripts/new_game.sh "My Game"            # -> ~/Work/my-game, private GitHub repo
+scripts/new_game.sh "My Game" ~/code/x --github none --synty PolygonStarter --check
+```
+
+It clones the kit (with its history), names the project, adds `GAME.md` for the game's
+design and agent rules, copies your local asset sources, makes the first commit and
+creates the game's own GitHub repo. The kit stays linked as the `kit` remote:
+
+```bash
+git fetch kit && git merge kit/main      # pull kit improvements into the game
+```
+
+Keep game code out of `kit/`, `addons/` and `scripts/`, and game rules in `GAME.md`
+rather than `AGENTS.md`, so those merges stay conflict-free. Point `Game.first_level`
+at your first level and delete `example/` (and its tests) once you no longer need it.
 
 ## Licences
 
